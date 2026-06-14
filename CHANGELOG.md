@@ -5,7 +5,7 @@ be committed and pushed to `origin/main` with the version entry updated.
 
 ## 0.2.1 - 2026-06-14
 
-Commit: `c6a3604`
+Tag: `v0.2.1`
 
 - Added `make` targets for build, test, package, and app launch.
 - Updated packaging instructions to use `bash Scripts/package_app.sh --open`.
