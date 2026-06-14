@@ -9,10 +9,36 @@ to open, or Command-Enter to reveal in Finder.
 - Native SwiftUI macOS app.
 - Spotlight-backed search through `/usr/bin/mdfind`.
 - Name, path, and content search modes.
+- Everything-style query operators.
 - Scope filters for all indexed locations, Home, Desktop, Documents, and Downloads.
 - Result columns for name, path, kind, size, and modification time.
 - Keyboard-first interactions: Enter opens, Command-Enter reveals, Command-R refreshes.
 - Context menu actions for opening, revealing, and copying a path.
+
+## Query syntax
+
+Plain words are combined with AND, so `report final` searches for both words.
+Use quotes for a phrase with spaces: `"final report"`.
+
+Supported operators:
+
+- `name:paper` or `n:paper`
+- `path:Downloads` or `p:Downloads`
+- `content:invoice` or `text:invoice`
+- `ext:pdf` or `ext:pdf,docx`
+- `size:>10mb`, `size:<500kb`, `size:>=1gb`
+- `date:today`, `date:yesterday`, `date:week`, `date:month`, `date:year`
+- `date:>2026-01-01` or `modified:<2026-06-01`
+- `type:folder` or `type:file`
+
+Examples:
+
+```text
+论文 ext:pdf
+path:Downloads ext:zip size:>100mb
+name:report date:week
+content:"orbital elements" ext:pdf
+```
 
 ## Run
 
@@ -47,6 +73,5 @@ If Spotlight indexing is disabled for a folder, results from that folder will be
 
 - Package as a signed `.app` bundle.
 - Add custom folder scopes.
-- Add Everything-like query operators such as `ext:pdf`, `size:>10mb`, and date filters.
 - Add a dedicated local file indexer using FSEvents for locations where Spotlight is not enough.
 - Add preferences for hotkey, ignored folders, and launch at login.

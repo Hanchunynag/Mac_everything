@@ -18,4 +18,6 @@ cp "$ROOT_DIR/.build/$CONFIGURATION/MacEverything" "$MACOS_DIR/MacEverything"
 cp "$ROOT_DIR/Resources/Info.plist" "$CONTENTS_DIR/Info.plist"
 chmod +x "$MACOS_DIR/MacEverything"
 
+codesign --force --deep --sign - "$APP_DIR" >/dev/null
+
 echo "$APP_DIR"

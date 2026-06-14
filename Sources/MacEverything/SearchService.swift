@@ -10,7 +10,7 @@ struct SearchRequest: Sendable {
 struct SearchService: Sendable {
     func search(_ request: SearchRequest) async throws -> [FileResult] {
         try await Task.detached(priority: .userInitiated) {
-            let predicate = request.mode.predicate(for: request.text)
+            let predicate = SearchQueryCompiler.predicate(for: request.text, defaultMode: request.mode)
             var arguments = ["-0"]
 
             for root in request.scope.roots {
@@ -66,27 +66,6 @@ enum SearchMode: String, CaseIterable, Identifiable, Sendable {
     case content = "Content"
 
     var id: String { rawValue }
-
-    func predicate(for text: String) -> String {
-        let tokens = text
-            .split(whereSeparator: { $0.isWhitespace })
-            .map(String.init)
-            .filter { !$0.isEmpty }
-
-        let clauses = tokens.map { token -> String in
-            let pattern = SearchPredicate.escapePattern(token)
-            switch self {
-            case .name:
-                return "kMDItemFSName == \"*\(pattern)*\"cd"
-            case .path:
-                return "kMDItemPath == \"*\(pattern)*\"cd"
-            case .content:
-                return "(kMDItemFSName == \"*\(pattern)*\"cd || kMDItemTextContent == \"*\(pattern)*\"cd)"
-            }
-        }
-
-        return clauses.isEmpty ? "kMDItemFSName == \"*\"" : clauses.joined(separator: " && ")
-    }
 }
 
 enum SearchScope: String, CaseIterable, Identifiable, Sendable {
@@ -134,13 +113,5 @@ enum SearchLimit: Int, CaseIterable, Identifiable {
         case .fiveThousand:
             return "5,000"
         }
-    }
-}
-
-private enum SearchPredicate {
-    static func escapePattern(_ value: String) -> String {
-        value
-            .replacingOccurrences(of: "\\", with: "\\\\")
-            .replacingOccurrences(of: "\"", with: "\\\"")
     }
 }

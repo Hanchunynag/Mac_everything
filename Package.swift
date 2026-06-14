@@ -11,6 +11,10 @@ let package = Package(
         .executable(name: "MacEverything", targets: ["MacEverything"])
     ],
     targets: [
-        .executableTarget(name: "MacEverything")
+        .executableTarget(name: "MacEverything"),
+        .testTarget(
+            name: "MacEverythingTests",
+            dependencies: ["MacEverything"]
+        )
     ]
 )
