@@ -54,11 +54,11 @@ The first build may take a moment. Once the app window opens, type in the search
 ## Package as an app
 
 ```bash
-Scripts/package_app.sh
-open .build/MacEverything.app
+make run-app
 ```
 
-The generated app lives at `.build/MacEverything.app`.
+The generated app lives at `.build/MacEverything.app`. If you prefer not to use
+`make`, run `bash Scripts/package_app.sh --open`.
 
 ## macOS Permissions
 

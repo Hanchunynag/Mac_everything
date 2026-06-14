@@ -3,6 +3,15 @@
 All notable MacEverything changes are recorded here. Each completed step should
 be committed and pushed to `origin/main` with the version entry updated.
 
+## 0.2.1 - 2026-06-14
+
+Commit: `c6a3604`
+
+- Added `make` targets for build, test, package, and app launch.
+- Updated packaging instructions to use `bash Scripts/package_app.sh --open`.
+- Added `--open`, `--debug`, and `--release` options to the packaging script.
+- Clears app bundle extended attributes before ad-hoc signing.
+
 ## 0.2.0 - 2026-06-14
 
 Commit: `94474e1`
