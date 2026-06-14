@@ -3,7 +3,6 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var model = SearchViewModel()
-    @FocusState private var isSearchFocused: Bool
 
     var body: some View {
         VStack(spacing: 0) {
@@ -18,7 +17,7 @@ struct ContentView: View {
         .frame(minWidth: 900, minHeight: 560)
         .background(Color(nsColor: .windowBackgroundColor))
         .onAppear {
-            isSearchFocused = true
+            WindowActivation.activateApp()
         }
         .onChange(of: model.query) {
             model.scheduleSearch()
@@ -41,13 +40,14 @@ struct ContentView: View {
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundStyle(.secondary)
 
-            TextField("Search files and folders", text: $model.query)
-                .textFieldStyle(.plain)
-                .font(.system(size: 17))
-                .focused($isSearchFocused)
-                .onSubmit {
+            NativeSearchField(
+                text: $model.query,
+                placeholder: "Search files and folders"
+            ) {
                     model.openSelected()
-                }
+            }
+            .frame(minHeight: 24)
+            .layoutPriority(1)
 
             if model.isSearching {
                 ProgressView()

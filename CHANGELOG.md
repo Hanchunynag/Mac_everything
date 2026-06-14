@@ -3,6 +3,14 @@
 All notable MacEverything changes are recorded here. Each completed step should
 be committed and pushed to `origin/main` with the version entry updated.
 
+## 0.2.3 - 2026-06-14
+
+Tag: `v0.2.3`
+
+- Replaced the SwiftUI search box with a native `NSTextField` wrapper.
+- Activates the app and makes the search field first responder on launch.
+- Fixes the search box not accepting keyboard input when launched through `swift run`.
+
 ## 0.2.2 - 2026-06-14
 
 Tag: `v0.2.2`
