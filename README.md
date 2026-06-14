@@ -15,6 +15,9 @@ to open, or Command-Enter to reveal in Finder.
 - Keyboard-first interactions: Enter opens, Command-Enter reveals, Command-R refreshes.
 - Context menu actions for opening, revealing, and copying a path.
 
+Version history is recorded in [CHANGELOG.md](CHANGELOG.md). Each completed
+development step should update that file, commit, and push to GitHub.
+
 ## Query syntax
 
 Plain words are combined with AND, so `report final` searches for both words.
