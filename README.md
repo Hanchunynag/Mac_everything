@@ -26,6 +26,7 @@ make stress
 ```
 
 See [TESTING.md](TESTING.md) for the full automated and manual test checklist.
+See [DISTRIBUTION.md](DISTRIBUTION.md) for demo packaging and release options.
 
 ## Query syntax
 
@@ -59,7 +60,7 @@ make run-app
 ```
 
 The first build may take a moment. This builds the app artifacts and opens the
-verified one-click launcher at `.build/MacEverything.command`.
+signed app bundle at `.build/MacEverything.app`.
 
 ## Package
 
@@ -69,14 +70,12 @@ bash Scripts/package_app.sh --release
 
 Generated artifacts:
 
+- `.build/MacEverything.app`: signed app bundle for one-click local launch.
 - `.build/MacEverything.command`: verified one-click local launcher.
 - `.build/Standalone/MacEverything`: standalone executable used by the launcher.
-- `.build/MacEverything.app`: standard Xcode-built app bundle, kept for app-bundle
-  packaging work.
 
-On this development machine, macOS currently terminates the app-bundle executable
-when it is run from `Contents/MacOS`, while the standalone executable runs
-correctly. Use `.build/MacEverything.command` for reliable local one-click launch.
+Use `.build/MacEverything.command` only as a fallback if local macOS security
+policy blocks the development-signed `.app`.
 
 ## macOS Permissions
 

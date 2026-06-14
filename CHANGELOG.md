@@ -3,6 +3,15 @@
 All notable MacEverything changes are recorded here. Each completed step should
 be committed and pushed to `origin/main` with the version entry updated.
 
+## 0.3.2 - 2026-06-14
+
+Tag: `v0.3.2`
+
+- Fixed `.app` launch by explicitly re-signing the copied Xcode app bundle and executable.
+- Added `make release-zip` for local demo zip packaging.
+- Added `DISTRIBUTION.md` with local demo, TestFlight, Mac App Store, and Developer ID paths.
+- Verified `make run-app` opens `.build/MacEverything.app` directly.
+
 ## 0.3.1 - 2026-06-14
 
 Tag: `v0.3.1`
@@ -10,7 +19,8 @@ Tag: `v0.3.1`
 - Added a standard Xcode macOS application project for one-click `.app` builds.
 - Updated packaging to build `MacEverything.xcodeproj` and copy the signed app to `.build/MacEverything.app`.
 - Added `.build/MacEverything.command` as the verified one-click local launcher.
-- `make run-app` and `bash Scripts/package_app.sh --open` now open the command launcher because macOS terminates this local development `.app` bundle on this machine.
+- Explicitly re-signs the copied Xcode app bundle so AMFI accepts it at launch.
+- `make run-app` and `bash Scripts/package_app.sh --open` now open `.build/MacEverything.app` directly.
 
 ## 0.3.0 - 2026-06-14
 

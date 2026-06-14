@@ -47,6 +47,5 @@ Then verify:
 - Command-Enter reveals the selected result in Finder.
 - Command-R refreshes the current query.
 
-Current note: `make run-app` opens `.build/MacEverything.command`, which launches
-the standalone executable. The Xcode-built `.app` bundle is generated for
-packaging work, but local UI testing should use the command launcher.
+Current note: `make run-app` opens `.build/MacEverything.app`. The command
+launcher remains available at `.build/MacEverything.command` as a fallback.

@@ -1,4 +1,4 @@
-.PHONY: build test stress package run-app clean
+.PHONY: build test stress package release-zip run-app clean
 
 build:
 	swift build
@@ -11,6 +11,9 @@ stress:
 
 package:
 	bash Scripts/package_app.sh
+
+release-zip:
+	bash Scripts/make_release_zip.sh
 
 run-app:
 	bash Scripts/package_app.sh --open

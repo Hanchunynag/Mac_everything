@@ -64,6 +64,8 @@ xcodebuild \
 rm -rf "$APP_DIR"
 cp -R "$BUILT_APP_DIR" "$APP_DIR"
 xattr -cr "$APP_DIR" 2>/dev/null || true
+codesign --force --sign "$IDENTITY" "$APP_DIR/Contents/MacOS/MacEverything" >/dev/null
+codesign --force --deep --sign "$IDENTITY" "$APP_DIR" >/dev/null
 
 rm -rf "$STANDALONE_DIR"
 mkdir -p "$STANDALONE_DIR"
@@ -84,5 +86,5 @@ echo "$COMMAND_PATH"
 echo "Signed with: $IDENTITY"
 
 if [[ "$SHOULD_OPEN" -eq 1 ]]; then
-  open "$COMMAND_PATH"
+  open "$APP_DIR"
 fi
