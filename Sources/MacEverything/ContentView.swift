@@ -17,7 +17,9 @@ struct ContentView: View {
         .frame(minWidth: 900, minHeight: 560)
         .background(Color(nsColor: .windowBackgroundColor))
         .onAppear {
+            #if SWIFT_PACKAGE
             WindowActivation.activateApp()
+            #endif
         }
         .onChange(of: model.query) {
             model.scheduleSearch()

@@ -58,19 +58,25 @@ content:"orbital elements" ext:pdf
 make run-app
 ```
 
-The first build may take a moment. Keep the terminal command running while you
-test the app. Once the app window opens, type in the search field.
+The first build may take a moment. This builds the app artifacts and opens the
+verified one-click launcher at `.build/MacEverything.command`.
 
-## Package as an app
+## Package
 
 ```bash
 bash Scripts/package_app.sh --release
 ```
 
-The generated app lives at `.build/MacEverything.app`. The packaged `.app` is
-currently for packaging experiments; use `make run-app` for local testing until
-the project has a standard Xcode app target. `bash Scripts/package_app.sh --open`
-will package the app and then launch the built executable directly.
+Generated artifacts:
+
+- `.build/MacEverything.command`: verified one-click local launcher.
+- `.build/Standalone/MacEverything`: standalone executable used by the launcher.
+- `.build/MacEverything.app`: standard Xcode-built app bundle, kept for app-bundle
+  packaging work.
+
+On this development machine, macOS currently terminates the app-bundle executable
+when it is run from `Contents/MacOS`, while the standalone executable runs
+correctly. Use `.build/MacEverything.command` for reliable local one-click launch.
 
 ## macOS Permissions
 

@@ -47,5 +47,6 @@ Then verify:
 - Command-Enter reveals the selected result in Finder.
 - Command-R refreshes the current query.
 
-Current note: the hand-built `.app` bundle is experimental. Use `make run-app`
-for reliable local UI testing until a standard Xcode app target is added.
+Current note: `make run-app` opens `.build/MacEverything.command`, which launches
+the standalone executable. The Xcode-built `.app` bundle is generated for
+packaging work, but local UI testing should use the command launcher.

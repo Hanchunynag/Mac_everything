@@ -3,6 +3,15 @@
 All notable MacEverything changes are recorded here. Each completed step should
 be committed and pushed to `origin/main` with the version entry updated.
 
+## 0.3.1 - 2026-06-14
+
+Tag: `v0.3.1`
+
+- Added a standard Xcode macOS application project for one-click `.app` builds.
+- Updated packaging to build `MacEverything.xcodeproj` and copy the signed app to `.build/MacEverything.app`.
+- Added `.build/MacEverything.command` as the verified one-click local launcher.
+- `make run-app` and `bash Scripts/package_app.sh --open` now open the command launcher because macOS terminates this local development `.app` bundle on this machine.
+
 ## 0.3.0 - 2026-06-14
 
 Tag: `v0.3.0`
