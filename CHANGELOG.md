@@ -3,6 +3,16 @@
 All notable MacEverything changes are recorded here. Each completed step should
 be committed and pushed to `origin/main` with the version entry updated.
 
+## 0.3.3 - 2026-06-14
+
+Tag: `v0.3.3`
+
+- Added a generated macOS AppIcon asset catalog for the app bundle.
+- Wired the Xcode app target to compile and use `AppIcon`.
+- Updated release zip defaults and Xcode marketing version to `0.3.3`.
+- Documented local development run caveats around signing, Gatekeeper,
+  Spotlight permissions, and generated `.build` artifacts.
+
 ## 0.3.2 - 2026-06-14
 
 Tag: `v0.3.2`

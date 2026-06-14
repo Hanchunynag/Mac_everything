@@ -40,6 +40,7 @@ make run-app
 Then verify:
 
 - The window appears and the search field accepts typing immediately.
+- The app shows the MacEverything icon in Finder, Dock, and Command-Tab.
 - `README` returns results.
 - `README ext:md` filters to Markdown files.
 - `path:Downloads`, `size:>10mb`, `date:today`, and `type:folder` do not crash.

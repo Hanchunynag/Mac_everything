@@ -14,6 +14,7 @@ to open, or Command-Enter to reveal in Finder.
 - Result columns for name, path, kind, size, and modification time.
 - Keyboard-first interactions: Enter opens, Command-Enter reveals, Command-R refreshes.
 - Context menu actions for opening, revealing, and copying a path.
+- Generated native macOS app icon.
 
 Version history is recorded in [CHANGELOG.md](CHANGELOG.md). Each completed
 development step should update that file, commit, and push to GitHub.
@@ -60,7 +61,9 @@ make run-app
 ```
 
 The first build may take a moment. This builds the app artifacts and opens the
-signed app bundle at `.build/MacEverything.app`.
+signed app bundle at `.build/MacEverything.app`. Local builds use a development
+signature, so they are intended for testing on this Mac rather than public
+distribution.
 
 ## Package
 
@@ -88,6 +91,15 @@ For best results, grant the terminal or built app Full Disk Access:
 4. Add Terminal, iTerm, or the packaged app.
 
 If Spotlight indexing is disabled for a folder, results from that folder will be missing.
+
+## App Icon
+
+The app icon lives in `Resources/Assets.xcassets/AppIcon.appiconset`.
+Regenerate all icon sizes after changing the source drawing:
+
+```bash
+swift Scripts/generate_app_icon.swift
+```
 
 ## Roadmap
 
