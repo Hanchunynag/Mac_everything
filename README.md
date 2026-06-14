@@ -46,19 +46,22 @@ content:"orbital elements" ext:pdf
 ## Run
 
 ```bash
-swift run MacEverything
+make run-app
 ```
 
-The first build may take a moment. Once the app window opens, type in the search field.
+The first build may take a moment. Keep the terminal command running while you
+test the app. Once the app window opens, type in the search field.
 
 ## Package as an app
 
 ```bash
-make run-app
+bash Scripts/package_app.sh --release
 ```
 
-The generated app lives at `.build/MacEverything.app`. If you prefer not to use
-`make`, run `bash Scripts/package_app.sh --open`.
+The generated app lives at `.build/MacEverything.app`. The packaged `.app` is
+currently for packaging experiments; use `make run-app` for local testing until
+the project has a standard Xcode app target. `bash Scripts/package_app.sh --open`
+will package the app and then launch the built executable directly.
 
 ## macOS Permissions
 

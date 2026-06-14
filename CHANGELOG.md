@@ -3,6 +3,17 @@
 All notable MacEverything changes are recorded here. Each completed step should
 be committed and pushed to `origin/main` with the version entry updated.
 
+## 0.2.2 - 2026-06-14
+
+Tag: `v0.2.2`
+
+- Changed `make run-app` to launch through `swift run`, which is the reliable local test path for the SwiftPM app.
+- Packaging now prefers an installed Apple Development signing identity.
+- Added `PkgInfo` to the generated app bundle.
+- Packaging output now reports which signing identity was used.
+- Documented that the hand-built `.app` is experimental until a standard Xcode app target is added.
+- Changed `bash Scripts/package_app.sh --open` to launch the built executable directly instead of using the experimental `.app` bundle.
+
 ## 0.2.1 - 2026-06-14
 
 Tag: `v0.2.1`

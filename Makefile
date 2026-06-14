@@ -10,7 +10,7 @@ package:
 	bash Scripts/package_app.sh
 
 run-app:
-	bash Scripts/package_app.sh --open
+	swift run MacEverything
 
 clean:
 	swift package clean
