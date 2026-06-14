@@ -3,6 +3,17 @@
 All notable MacEverything changes are recorded here. Each completed step should
 be committed and pushed to `origin/main` with the version entry updated.
 
+## 0.3.0 - 2026-06-14
+
+Tag: `v0.3.0`
+
+- Added broader query compiler coverage for modes, operators, quoting, escaping, dates, and size filters.
+- Added async search service stress tests for limits and concurrent searches.
+- Added `Scripts/stress_test.sh` and `make stress` for repeatable local pressure testing.
+- Added `TESTING.md` with quick, stress, and manual UI test instructions.
+- Fixed potential `mdfind` pipe deadlock by reading output while the child process is running and terminating after the requested result limit.
+- Avoids repeatedly stealing keyboard focus after the search field has received its initial focus.
+
 ## 0.2.3 - 2026-06-14
 
 Tag: `v0.2.3`

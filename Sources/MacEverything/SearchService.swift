@@ -10,6 +10,7 @@ struct SearchRequest: Sendable {
 struct SearchService: Sendable {
     func search(_ request: SearchRequest) async throws -> [FileResult] {
         try await Task.detached(priority: .userInitiated) {
+            let limit = max(request.limit, 0)
             let predicate = SearchQueryCompiler.predicate(for: request.text, defaultMode: request.mode)
             var arguments = ["-0"]
 
@@ -30,22 +31,65 @@ struct SearchService: Sendable {
             process.standardError = error
 
             try process.run()
+            let outputResult = try SearchOutputCollector.readLimitedData(
+                from: output.fileHandleForReading,
+                process: process,
+                limit: limit
+            )
             process.waitUntilExit()
 
-            guard process.terminationStatus == 0 else {
+            guard process.terminationStatus == 0 || outputResult.terminatedAfterLimit else {
                 let data = error.fileHandleForReading.readDataToEndOfFile()
                 let message = String(data: data, encoding: .utf8) ?? "mdfind failed"
                 throw SearchError.commandFailed(message.trimmingCharacters(in: .whitespacesAndNewlines))
             }
 
-            let data = output.fileHandleForReading.readDataToEndOfFile()
-            return data
+            return outputResult.data
                 .split(separator: 0)
-                .prefix(request.limit)
+                .prefix(limit)
                 .compactMap { String(data: Data($0), encoding: .utf8) }
                 .map(FileResult.init(path:))
         }
         .value
+    }
+}
+
+private enum SearchOutputCollector {
+    static func readLimitedData(
+        from handle: FileHandle,
+        process: Process,
+        limit: Int
+    ) throws -> (data: Data, terminatedAfterLimit: Bool) {
+        guard limit > 0 else {
+            process.terminate()
+            return (Data(), true)
+        }
+
+        var data = Data()
+        var resultCount = 0
+        var terminatedAfterLimit = false
+
+        while true {
+            try Task.checkCancellation()
+
+            let chunk = handle.availableData
+            if chunk.isEmpty {
+                break
+            }
+
+            data.append(chunk)
+            resultCount += chunk.reduce(0) { count, byte in
+                count + (byte == 0 ? 1 : 0)
+            }
+
+            if resultCount >= limit {
+                process.terminate()
+                terminatedAfterLimit = true
+                break
+            }
+        }
+
+        return (data, terminatedAfterLimit)
     }
 }
 

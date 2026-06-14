@@ -18,6 +18,15 @@ to open, or Command-Enter to reveal in Finder.
 Version history is recorded in [CHANGELOG.md](CHANGELOG.md). Each completed
 development step should update that file, commit, and push to GitHub.
 
+## Testing
+
+```bash
+make test
+make stress
+```
+
+See [TESTING.md](TESTING.md) for the full automated and manual test checklist.
+
 ## Query syntax
 
 Plain words are combined with AND, so `report final` searches for both words.

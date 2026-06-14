@@ -23,6 +23,7 @@ struct NativeSearchField: NSViewRepresentable {
         DispatchQueue.main.async {
             WindowActivation.activateApp()
             field.window?.makeFirstResponder(field)
+            context.coordinator.didRequestInitialFocus = true
         }
 
         return field
@@ -34,8 +35,9 @@ struct NativeSearchField: NSViewRepresentable {
         }
 
         DispatchQueue.main.async {
-            if field.window?.firstResponder !== field.currentEditor() {
+            if !context.coordinator.didRequestInitialFocus {
                 field.window?.makeFirstResponder(field)
+                context.coordinator.didRequestInitialFocus = true
             }
         }
     }
@@ -48,6 +50,7 @@ struct NativeSearchField: NSViewRepresentable {
         @Binding private var text: String
         private let onSubmit: () -> Void
         weak var field: NSTextField?
+        var didRequestInitialFocus = false
 
         init(text: Binding<String>, onSubmit: @escaping () -> Void) {
             _text = text

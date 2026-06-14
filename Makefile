@@ -1,10 +1,13 @@
-.PHONY: build test package run-app clean
+.PHONY: build test stress package run-app clean
 
 build:
 	swift build
 
 test:
 	swift test
+
+stress:
+	bash Scripts/stress_test.sh
 
 package:
 	bash Scripts/package_app.sh
